@@ -13,12 +13,15 @@ public abstract class Piece {
     
     private boolean estVivant;
     private Point position;
+    private int couleur;
     private Plateau p;
     
-    public Piece(Point po)
+    public Piece(Point po, Plateau plat, int coul)
     {
         this.estVivant = true;
         this.position = po;
+        this.couleur = coul;
+        this.p = plat.getPlateau();
     }
     
     public Point getPositionPiece()
@@ -50,16 +53,11 @@ public abstract class Piece {
             
             for(int i = 0; i < temp.length ; i++)
             {
-                if(!this.p.estLibre(temp[i]))
+                if(this.p.estLibre(temp[i]))
                 {
-                    res = false;
+                    res = true;
                 }
             }
-            res = true;
-        }
-        else
-        {
-            res = false;
         }
         return res;
     }

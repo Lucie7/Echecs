@@ -45,4 +45,8 @@ public class Plateau {
                 return false;
         }
     }
+
+    public Plateau getPlateau() {
+        return this;
+    }
 }
