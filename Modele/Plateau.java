@@ -46,7 +46,11 @@ public class Plateau {
         }
     }
 
-    public Plateau getPlateau() {
-        return this;
+    public Piece[][] getGrille() {
+        return this.grille;
+    }
+    
+    public void setGrille(Piece pi, Point po) {
+        this.grille[po.getY()][po.getX()] = pi;
     }
 }

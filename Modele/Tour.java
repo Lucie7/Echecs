@@ -11,7 +11,7 @@ package Modele;
  */
 public class Tour extends Piece{
     
-    public Tour(Point p) {
+    public Tour(Point po, Plateau plat, int coul) {
         super(p);
     }
 

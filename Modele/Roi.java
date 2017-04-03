@@ -11,7 +11,7 @@ package Modele;
  */
 public class Roi extends Piece {
     
-    public Roi(Point p){
+    public Roi(Point po, Plateau plat, int coul){
         super(p);
     }
 

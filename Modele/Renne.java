@@ -11,7 +11,7 @@ package Modele;
  */
 public class Renne extends Piece{
     
-    public Renne(Point p){
+    public Renne(Point po, Plateau plat, int coul){
         super(p);
     }
 
