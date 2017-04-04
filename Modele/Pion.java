@@ -13,9 +13,9 @@ public class Pion extends Piece{
     
     private boolean premierDeplacement;
     
-    public Pion(Point po, Plateau plat, int coul)
+    public Pion(Point poi, Plateau pla, boolean cou)
     {
-        super(p);
+        super(poi,pla,cou);
         this.premierDeplacement = true;
     }
 
@@ -25,13 +25,31 @@ public class Pion extends Piece{
         int tailleAReserver = c.getArrivee().getY() - c.getDepart().getY();
         Point[] res = new Point[tailleAReserver];
         
-        Point temp1 = new Point(c.getDepart().getY()+1,c.getDepart().getX());
+        Point temp1;
+        
+        if(this.couleur == true)
+        {
+            temp1 = new Point(c.getDepart().getY()-1,c.getDepart().getX());
+        }
+        else
+        {
+            temp1 = new Point(c.getDepart().getY()+1,c.getDepart().getX());
+        }
         
         res[0] = temp1;
         
         if(tailleAReserver == 2)
         {
-            Point temp2 = new Point(c.getDepart().getY()+2,c.getDepart().getX());
+            Point temp2;
+            
+            if(this.couleur == true)
+            {
+                temp2 = new Point(c.getDepart().getY()-2,c.getDepart().getX());
+            }
+            else
+            {
+                temp2 = new Point(c.getDepart().getY()+2,c.getDepart().getX());
+            }
             
             res[1] = temp2;
         }
@@ -44,30 +62,57 @@ public class Pion extends Piece{
     {
         boolean res = false;
         
-        //test si au depart il est bien dans les dimensions de la grille
+        //test si au depart il est bien dans les dimension de la grille
         if((c.getDepart().getY() > 0) && (c.getDepart().getY() < 8))
         {
             //test si à l'arrivee il s'est bien deplacer d'au moin une case et qui'il ne depasse pas la grille
             if(c.getArrivee().getY() > 1 && c.getArrivee().getY() < 8)
             {
-                //test si il se deplace vers l'avant et uniquement sur l'axe verticale
-                if(c.getDepart().getY() < c.getArrivee().getY() && c.getArrivee().getX() == c.getDepart().getX())
+                if(this.couleur == true)
                 {
-                    //test si c'est le premier coup de la partie
-                    if(this.premierDeplacement)
+                    //test si il se deplace vers en haut et uniquement sur l'axe verticale
+                    if(c.getDepart().getY() < c.getArrivee().getY() && c.getArrivee().getX() == c.getDepart().getX())
                     {
-                        //test si il respecte le bon nombre de deplacement et qu'il se deplace obligatoirement
-                        if(((c.getArrivee().getY()) - (c.getDepart().getY()) < 2) && ((c.getArrivee().getY()) - (c.getDepart().getY()) > 0))
+                        //test si c'est le premier coup de la partie
+                        if(this.premierDeplacement == true)
                         {
-                            res = true;
-                            this.premierDeplacement = false;
+                            //test si il respecte le bon nombre de deplacement et qu'il se deplace obligatoirement
+                            if(((c.getArrivee().getY()) - (c.getDepart().getY()) <= 2) && ((c.getArrivee().getY()) - (c.getDepart().getY()) > 0))
+                            {
+                                res = true;
+                                this.premierDeplacement = false;
+                            }
+                        }
+                        else
+                        {
+                            if(((c.getArrivee().getY()) - (c.getDepart().getY()) == 1))
+                            {
+                                res = true;
+                            }
                         }
                     }
-                    else
+                }
+                else
+                {
+                    //test si il se deplace en bas et uniquement sur l'axe verticale
+                    if(c.getDepart().getY() > c.getArrivee().getY() && c.getArrivee().getX() == c.getDepart().getX())
                     {
-                        if(((c.getArrivee().getY()) - (c.getDepart().getY()) == 1))
+                        //test si c'est le premier coup de la partie
+                        if(this.premierDeplacement == true)
                         {
-                            res = true;
+                            //test si il respecte le bon nombre de deplacement et qu'il se deplace obligatoirement
+                            if(((c.getDepart().getY())-(c.getArrivee().getY())<=2)&&(((c.getDepart().getY())-(c.getArrivee().getY())>0)))
+                            {
+                                res = true;
+                                this.premierDeplacement = false;
+                            }
+                        }
+                        else
+                        {
+                            if( ( (c.getDepart().getY() ) - (c.getArrivee().getY() ) == 1 ) )
+                            {
+                                res = true;
+                            }
                         }
                     }
                 }

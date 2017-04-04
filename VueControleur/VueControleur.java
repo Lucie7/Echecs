@@ -132,11 +132,11 @@ public class VueControleur extends Application
             if(((column+row) % 2) == 0)
             {
                 rec.setFill(Color.WHITE);
-                /*
+                
                 final String imageURI = new File("C:\\Users\\pac-_\\Documents\\LIF13\\pion.png").toURI().toString();
                 Image monPion = new Image(imageURI);
-                gPane.add(new ImageView(monPion), column, row);
-                */
+                echiquier.add(new ImageView(monPion), column, row);
+                
             }
             
             echiquier.add(rec, column, row);

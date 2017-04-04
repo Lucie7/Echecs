@@ -13,9 +13,9 @@ import static java.lang.Math.abs;
  */
 public class Cavalier extends Piece{
     
-    public Cavalier(Point po, Plateau plat, int coul)
+    public Cavalier(Point poi, Plateau pla, boolean cou)
     {
-        super(p);
+        super(poi,pla,cou);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class Cavalier extends Piece{
     {
         boolean res = false;
         
-        //test si au depart il est bien dans les dimensions de la grille
+        //test si au depart il est bien dans les dimension de la grille
         if((c.getDepart().getY() > 0) && (c.getDepart().getY() < 8) && (c.getDepart().getX() > 0) && (c.getDepart().getX() < 8))
         {
             //test si il se deplace de 1 case horizontalement alors il se deplace de deux cases verticalement

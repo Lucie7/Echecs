@@ -7,23 +7,26 @@ package Modele;
 
 /**
  *
- * @author lucie
+ * @author testfatoslocal
  */
 public class Tour extends Piece{
     
-    public Tour(Point po, Plateau plat, int coul) {
-        super(p);
+    public Tour(Point poi, Plateau pla, boolean cou)
+    {
+        super(poi,pla,cou);
     }
 
     @Override
-    public Point[] getCheminDeplacement(Coup c) {
+    public Point[] getCheminDeplacement(Coup c)
+    {
         int tailleTableau;
         
         if(c.getDepart().getX() == c.getArrivee().getX())
         {
             tailleTableau = Math.abs(c.getArrivee().getY() - c.getDepart().getY());        
         }
-        else {
+        else
+        {
             tailleTableau = Math.abs(c.getArrivee().getX() - c.getDepart().getX());
         }
         
@@ -59,7 +62,8 @@ public class Tour extends Piece{
     }
 
     @Override
-    boolean estValideDirection(Coup c) {
+    boolean estValideDirection(Coup c)
+    {
         boolean res = false;
         
         //Si la pièce est dans le plateau
@@ -78,5 +82,4 @@ public class Tour extends Piece{
         
         return res;
     }
-    
 }

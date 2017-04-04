@@ -7,12 +7,13 @@ package Modele;
 
 /**
  *
- * @author p1408291
+ * @author testfatoslocal
  */
 public class Fou extends Piece{
     
-    public Fou(Point po, Plateau plat, int coul) {
-        super(p);
+    public Fou(Point poi, Plateau pla, boolean cou)
+    {
+        super(poi,pla,cou);
     }
     
     @Override
@@ -82,5 +83,4 @@ public class Fou extends Piece{
         
         return res;
     }
-    
 }

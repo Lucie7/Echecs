@@ -7,16 +7,18 @@ package Modele;
 
 /**
  *
- * @author lucie
+ * @author testfatoslocal
  */
-public class Renne extends Piece{
+public class Reine extends Piece{
     
-    public Renne(Point po, Plateau plat, int coul){
-        super(p);
-    }
+     public Reine(Point poi, Plateau pla, boolean cou)
+     {
+        super(poi,pla,cou);
+     }
 
     @Override
-    public Point[] getCheminDeplacement(Coup c) {
+    public Point[] getCheminDeplacement(Coup c)
+    {
         
         int tailleTableau;
         
@@ -92,7 +94,8 @@ public class Renne extends Piece{
     }
 
     @Override
-    boolean estValideDirection(Coup c) {
+    boolean estValideDirection(Coup c)
+    {
         boolean res = false;
         
         //Si la pièce est dans le plateau

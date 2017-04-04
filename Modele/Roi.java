@@ -7,23 +7,26 @@ package Modele;
 
 /**
  *
- * @author lucie
+ * @author testfatoslocal
  */
-public class Roi extends Piece {
+public class Roi extends Piece{
     
-    public Roi(Point po, Plateau plat, int coul){
-        super(p);
+    public Roi(Point poi, Plateau pla, boolean cou)
+    {
+        super(poi,pla,cou);
     }
 
     @Override
-    public Point[] getCheminDeplacement(Coup c) {
+    public Point[] getCheminDeplacement(Coup c)
+    {
         Point[] chemin = new Point[1];
         chemin[0] = c.getArrivee();
         return chemin;
     }
 
     @Override
-    boolean estValideDirection(Coup c) {
+    boolean estValideDirection(Coup c)
+    {
         boolean res = false;
         
         //test si je me déplace que d'une case dans n'importe quelle direction
@@ -39,5 +42,4 @@ public class Roi extends Piece {
         
         return res;
     }
-    
 }

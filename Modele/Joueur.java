@@ -9,7 +9,16 @@ package Modele;
  *
  * @author testfatoslocal
  */
-public class Joueur {
+public abstract class Joueur {
+    
+    protected boolean couleur;
+    protected String nom;
+    
+    public Joueur(boolean c, String n)
+    {
+        this.couleur = c;
+        this.nom = n;
+    }
     
     
 }
