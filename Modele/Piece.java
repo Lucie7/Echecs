@@ -71,15 +71,25 @@ public abstract class Piece {
 
                 for(int i = 0; i < temp.length ; i++)
                 {
-                    if(this.p.estLibre(temp[i]))
-                    {
-                        res = true;
-                    }
+                    //Si la case est libre alors on peut y aller
+		        if(this.p.estLibre(temp[i]))
+		        {
+		            res = true;
+		        }
+		        //Sinon si la case est occupé par une piece qui n'est pas de notre couleur alors on peut y aller et la manger
+		        else if(this.p.getGrillePlateau()[c.getArrivee().getY()][c.getArrivee().getX()].couleur != this.couleur) {
+		            res = true;
+		            this.p.getGrillePlateau()[c.getArrivee().getY()][c.getArrivee().getX()].estMangee();
+		        }
                 }
             }
         }
         
         return res;
+    }
+
+	public void estMangee() {
+        this.estVivant = false;
     }
     
 }

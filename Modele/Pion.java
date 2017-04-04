@@ -62,7 +62,7 @@ public class Pion extends Piece{
     {
         boolean res = false;
         
-        //test si au depart il est bien dans les dimension de la grille
+        //test si au depart il est bien dans les dimensions de la grille
         if((c.getDepart().getY() > 0) && (c.getDepart().getY() < 8))
         {
             //test si à l'arrivee il s'est bien deplacer d'au moin une case et qui'il ne depasse pas la grille
