@@ -5,11 +5,13 @@
  */
 package Modele;
 
+import java.util.Observable;
+
 /**
  *
  * @author testfatoslocal
  */
-public class Plateau {
+public class Plateau extends Observable{
     
     private Piece[][] grille;
     

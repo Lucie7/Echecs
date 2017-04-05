@@ -5,27 +5,13 @@
  */
 package Modele;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
+import java.util.Observable;
 
 /**
  *
  * @author testfatoslocal
  */
-public class Modele extends Application {
+public class Modele extends Observable{
     
-    @Override
-    public void start(Stage primaryStage) {
-        
-        String[] args = new String[1];
-        Partie.main(args);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
     
 }

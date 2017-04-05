@@ -29,11 +29,11 @@ public class Pion extends Piece{
         
         if(this.couleur == true)
         {
-            temp1 = new Point(c.getDepart().getY()-1,c.getDepart().getX());
+            temp1 = new Point(c.getDepart().getY()+1,c.getDepart().getX());
         }
         else
         {
-            temp1 = new Point(c.getDepart().getY()+1,c.getDepart().getX());
+            temp1 = new Point(c.getDepart().getY()-1,c.getDepart().getX());
         }
         
         res[0] = temp1;

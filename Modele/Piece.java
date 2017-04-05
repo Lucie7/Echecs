@@ -16,6 +16,7 @@ public abstract class Piece {
     protected Point position;
     protected boolean couleur;
     protected Plateau p;
+    protected String urlImage;
     
     public Piece(Point po, Plateau plat, boolean coul)
     {
@@ -91,5 +92,10 @@ public abstract class Piece {
 	public void estMangee() {
         this.estVivant = false;
     }
+        
+        public String getUrlImage()
+        {
+            return this.urlImage;
+        }
     
 }

@@ -20,5 +20,15 @@ public abstract class Joueur {
         this.nom = n;
     }
     
+    public String getJoueurNom()
+    {
+        return this.nom;
+    }
+    
+    public boolean getJoueurCouleur()
+    {
+        return this.couleur;
+    }
+    
     
 }

@@ -11,10 +11,10 @@ package Modele;
  */
 public class Partie {
     
-    Joueur j1;
-    Joueur j2;
-    Plateau plat;
-    boolean estAuTourDeJ1;
+    public Joueur j1;
+    public Joueur j2;
+    private Plateau plat;
+    private boolean estAuTourDeJ1;
     
     public Partie(Joueur jou1, Joueur jou2)
     {
@@ -40,74 +40,35 @@ public class Partie {
         }
     }
     
+    public Joueur getPremierJoueur()
+    {
+        return this.j1;
+    }
+    
+    public Joueur getSecondJoueur()
+    {
+        return this.j2;
+    }
+    
     public static void main(String[] args)
     {
         System.out.println("HELLO");
         
-        /*Point departPion = new Point(1,2); // premiere ligne, deuxieme colonne
-        Point departFou = new Point(7,2);
-        
-        Plateau pla = new Plateau();
-        pla.initPlateau();
-        
-        Pion pi = new Pion(departPion,pla,0);
-        Fou fo = new Fou(departFou,pla,0);
-        
-        Point poi1 = new Point(3,2);
-        Point poi2 = new Point(5,2);
-        Point poi3 = new Point(6,2);
-        Point poi4 = new Point(6,3);
-        
-        Coup coupPion1 = new Coup(pi.getPositionPiece(),poi1);
-        Coup coupFou1 = new Coup(fo.getPositionPiece(),poi3);
-        
-        System.out.println("Pour le pion :");
-        
-        System.out.println(pi.getPositionPiece().getY());
-        System.out.println(pi.getPositionPiece().getX());
-        
-        pi.appliquerCoup(coupPion1);
-        
-        System.out.println(pi.getPositionPiece().getY());
-        System.out.println(pi.getPositionPiece().getX());
-        
-        Coup coupPion2 = new Coup(pi.getPositionPiece(),poi2);
-        
-        pi.appliquerCoup(coupPion2);
-        
-        System.out.println(pi.getPositionPiece().getY());
-        System.out.println(pi.getPositionPiece().getX());
-        
-        System.out.println("Pour le fou :");
-        
-        System.out.println(fo.getPositionPiece().getY());
-        System.out.println(fo.getPositionPiece().getX());
-        
-        fo.appliquerCoup(coupFou1);
-        
-        System.out.println(fo.getPositionPiece().getY());
-        System.out.println(fo.getPositionPiece().getX());
-        
-        Coup coupFou2 = new Coup(fo.getPositionPiece(),poi4);
-         
-        fo.appliquerCoup(coupFou2);
-
-        System.out.println(fo.getPositionPiece().getY());
-        System.out.println(fo.getPositionPiece().getX());*/
-        
-        /*Plateau plat = new Plateau();
+        Plateau plat = new Plateau();
         
         plat.initPlateau();
         
         plat.AffichePlateau();
         
-        Point arr = new Point(3, 0);
+        Point p1 = new Point(0, 0);
         
-        Coup c = new Coup(plat.getGrillePlateau()[0][0].getPositionPiece(), arr);
+        Tour t = new Tour(p1, plat, true);
         
-        plat.getGrillePlateau()[0][0].appliquerCoup(c);
+        Point p2 = new Point(3,1);
         
-        plat.AffichePlateau();*/
+        plat.setGrille(t, p2);
+        
+        plat.AffichePlateau();
         
         System.out.println("BYE");
     }
