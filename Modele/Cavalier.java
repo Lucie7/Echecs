@@ -13,9 +13,9 @@ import static java.lang.Math.abs;
  */
 public class Cavalier extends Piece{
     
-    public Cavalier(Point poi, Plateau pla, boolean cou)
+    public Cavalier(Point poi, Plateau pla, boolean cou, String url)
     {
-        super(poi,pla,cou);
+        super(poi,pla,cou,url);
     }
 
     @Override
@@ -35,18 +35,22 @@ public class Cavalier extends Piece{
     boolean estValideDirection(Coup c)
     {
         boolean res = false;
+        System.err.println("1900");
         
         //test si au depart il est bien dans les dimensions de la grille
-        if((c.getDepart().getY() > 0) && (c.getDepart().getY() < 8) && (c.getDepart().getX() > 0) && (c.getDepart().getX() < 8))
+        if((c.getDepart().getY() >= 0) && (c.getDepart().getY() < 8) && (c.getDepart().getX() >= 0) && (c.getDepart().getX() < 8))
         {
+            System.err.println("1901");
             //test si il se deplace de 1 case horizontalement alors il se deplace de deux cases verticalement
             if((abs(c.getArrivee().getY() - c.getDepart().getY()) == 1) && (abs(c.getArrivee().getX() - c.getDepart().getX()) == 2))
             {
+                System.err.println("1902");
                 res = true;
             }
             //test si il se deplace de 1 case verticalement alors il se deplace de deux cases horizontalement
             else if((abs(c.getArrivee().getY() - c.getDepart().getY()) == 2) && (abs(c.getArrivee().getX() - c.getDepart().getX()) == 1))
             {
+                System.err.println("1903");
                 res = true;
             }
         }

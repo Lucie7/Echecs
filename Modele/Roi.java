@@ -11,9 +11,9 @@ package Modele;
  */
 public class Roi extends Piece{
     
-    public Roi(Point poi, Plateau pla, boolean cou)
+    public Roi(Point poi, Plateau pla, boolean cou,String url)
     {
-        super(poi,pla,cou);
+        super(poi,pla,cou,url);
     }
 
     @Override

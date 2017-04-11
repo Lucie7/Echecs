@@ -45,26 +45,26 @@ public class Plateau extends Observable{
         Point posSecTourJ1 = new Point(0, 7);
         Point posSecTourJ2 = new Point(7, 7);
         
-        Roi pieceRoiJ1 = new Roi(posRoiJ1, this, true);
-        Roi pieceRoiJ2 = new Roi(posRoiJ2, this, false);
+        Roi pieceRoiJ1 = new Roi(posRoiJ1, this, true, "file:images/roi_blanc.png");
+        Roi pieceRoiJ2 = new Roi(posRoiJ2, this, false, "file:images/roi_noir.png");
         
-        Reine pieceReineJ1 = new Reine(posReineJ1, this, true);
-        Reine pieceReineJ2 = new Reine(posReineJ2, this, false);
+        Reine pieceReineJ1 = new Reine(posReineJ1, this, true,"file:images/reine_blanc.png");
+        Reine pieceReineJ2 = new Reine(posReineJ2, this, false,"file:images/reine_noir.png");
         
         
-        Tour pieceFirstTourJ1 = new Tour(posFirstTourJ1, this, true);
-        Tour pieceSecTourJ1 = new Tour(posSecTourJ1, this, true);
-        Cavalier pieceFirstCavJ1 = new Cavalier(posFirstCavJ1, this, true);
-        Cavalier pieceSecCavJ1 = new Cavalier(posSecCavJ1, this, true);
-        Fou pieceFirstFouJ1 = new Fou(posFirstFouJ1, this, true);
-        Fou pieceSecFouJ1 = new Fou(posSecFouJ1, this, true);
+        Tour pieceFirstTourJ1 = new Tour(posFirstTourJ1, this, true,"file:images/tour_blanc.png");
+        Tour pieceSecTourJ1 = new Tour(posSecTourJ1, this, true,"file:images/tour_blanc.png");
+        Cavalier pieceFirstCavJ1 = new Cavalier(posFirstCavJ1, this, true,"file:images/cavalier_blanc.png");
+        Cavalier pieceSecCavJ1 = new Cavalier(posSecCavJ1, this, true,"file:images/cavalier_blanc.png");
+        Fou pieceFirstFouJ1 = new Fou(posFirstFouJ1, this, true,"file:images/fou_blanc.png");
+        Fou pieceSecFouJ1 = new Fou(posSecFouJ1, this, true,"file:images/fou_blanc.png");
         
-        Tour pieceFirstTourJ2 = new Tour(posFirstTourJ1, this, false);
-        Tour pieceSecTourJ2 = new Tour(posSecTourJ1, this, false);
-        Cavalier pieceFirstCavJ2 = new Cavalier(posFirstCavJ1, this, false);
-        Cavalier pieceSecCavJ2 = new Cavalier(posSecCavJ1, this, false);
-        Fou pieceFirstFouJ2 = new Fou(posFirstFouJ1, this, false);
-        Fou pieceSecFouJ2 = new Fou(posSecFouJ1, this, false);
+        Tour pieceFirstTourJ2 = new Tour(posFirstTourJ1, this, false,"file:images/tour_noir.png");
+        Tour pieceSecTourJ2 = new Tour(posSecTourJ1, this, false,"file:images/tour_noir.png");
+        Cavalier pieceFirstCavJ2 = new Cavalier(posFirstCavJ1, this, false,"file:images/cavalier_noir.png");
+        Cavalier pieceSecCavJ2 = new Cavalier(posSecCavJ1, this, false,"file:images/cavalier_noir.png");
+        Fou pieceFirstFouJ2 = new Fou(posFirstFouJ1, this, false,"file:images/fou_noir.png");
+        Fou pieceSecFouJ2 = new Fou(posSecFouJ1, this, false,"file:images/fou_noir.png");
         
         Pion[] piecePionJ1 = new Pion[8];
         Pion[] piecePionJ2 = new Pion[8];
@@ -76,7 +76,7 @@ public class Plateau extends Observable{
         
         for(i = 0; i < piecePionJ1.length ; i++)
         {
-            piecePionJ1[i] = new Pion(posPionJ1[i], this, true);
+            piecePionJ1[i] = new Pion(posPionJ1[i], this, true,"file:images/pion_blanc.png");
         }
         
         for(j = 0; j < posPionJ2.length ; j++)
@@ -86,7 +86,7 @@ public class Plateau extends Observable{
         
         for(j = 0; j < piecePionJ2.length ; j++)
         {
-            piecePionJ2[j] = new Pion(posPionJ2[j], this, false);
+            piecePionJ2[j] = new Pion(posPionJ2[j], this, false,"file:images/pion_noir.png");
         }
         
         this.grille[posReineJ1.getY()][posReineJ1.getX()] = pieceReineJ1;
@@ -130,10 +130,16 @@ public class Plateau extends Observable{
     
     public boolean estLibre(Point p)
     {
+        System.out.println("z");
         boolean res = false;
         if(grille[p.getY()][p.getX()] == null)
         {
+            System.out.println("w");
             res = true;
+        }
+        else
+        {
+            System.out.println("case " + p.getY() +","+ (p.getX()) + " non libre");
         }
         
         return res;
@@ -173,6 +179,178 @@ public class Plateau extends Observable{
             }
             System.out.println();
         }
+    }
+    
+    public void AfficheDetailPlateau()
+    {
+        int i, j;
+        
+        for( i = 0 ; i < this.grille.length ; i++)
+        {
+            for( j = 0 ; j < this.grille.length ; j++)
+            {
+                if(this.grille[i][j] != null)
+                {
+                    if(this.grille[i][j] instanceof Cavalier )
+                    {
+                        System.out.print("Ca\t");
+                    }
+                    else if(this.grille[i][j] instanceof Fou )
+                    {
+                        System.out.print("Fo\t");
+                    }
+                    else if(this.grille[i][j] instanceof Pion )
+                    {
+                        System.out.print("Pi\t");
+                    }
+                    else if(this.grille[i][j] instanceof Reine )
+                    {
+                        System.out.print("Re\t");
+                    }
+                    else if(this.grille[i][j] instanceof Roi )
+                    {
+                        System.out.print("Ro\t");
+                    }
+                    else if(this.grille[i][j] instanceof Tour )
+                    {
+                        System.out.print("To\t");
+                    }
+                    else
+                    {
+                        System.out.print("!\t");
+                    }
+                    
+                }
+                else
+                {
+                    System.out.print("-\t");
+                }
+            }
+            System.out.println();
+        }
+    }
+    
+    
+    public boolean estEnEchecRoi(boolean couleur) {
+        boolean res = false;
+        int i, j;
+        Point positionRoi = null;
+        
+        //On créé un tableau qui va contenir des 0 et des 1
+        //Il y aura un 1 si il y a une piece(qui n'est pas le roi) sur la case ou si une des pieces adverse peut se déplacer dessus
+        int[][] tableau = new int[8][8];
+        //On initialise le tableau:
+        for(i=0; i<8; i++) {
+            for(j=0; j<8; j++) {
+                tableau[j][i] = 0;
+            }
+        }
+        
+        //On parcourt le plateau pour trouver le roi
+        //Et on remplit notre tableau avec des 1 si il y a une piece ou si une piece peut se dépacer dessus
+        for(i = 0; i<8; i++) {
+            for(j=0; j<8; j++) {
+                Point p = new Point(j, i);
+                //Si il y a une piece sur la case
+                if(!this.estLibre(p)) {
+                    //Si la piece est un roi de la couleur qu'on cherche
+                    if(this.grille[j][i] instanceof Roi && this.grille[j][i].couleur == couleur) {
+                        positionRoi = new Point(j,i);
+                    }
+                    //Si ce n'est pas le roi que l'on cherche alors on met un un dans le tableau
+                    else {
+                        tableau[j][i] = 1;
+                        
+                        //Si la piece est une piece adverse alors on met un 1 partout où elle peut se déplacer
+                        if(this.grille[j][i].couleur != couleur) {
+                            Point[] tabCoupPossible = this.grille[j][i].EnsembleCoup();
+                        
+                            int k = 0;
+                            while(tabCoupPossible[k] != null) {
+                                tableau[tabCoupPossible[i].getY()][tabCoupPossible[i].getX()] = 1;
+                                k++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        //Maintenant, on a la position du roi et une grille rempli de 0 et de 1
+        //Si le roi est sur un 1 alors il est en echec
+        if(tableau[positionRoi.getY()][positionRoi.getX()] == 1){
+            res = true;
+            //this.grille[positionRoi.getY()][positionRoi.getX()].setEstEnEchec(true);
+        }
+        
+        return res;
+    }
+
+    
+    /*public boolean estEnEchecRoi(boolean couleur) {
+        
+        boolean res = false;
+        Point positionRoi = null;
+        
+         for(int i=0; i<8; i++) {
+            for(int j=0; j<8; j++) {
+                Point p = new Point(j, i);
+                
+                if(!this.estLibre(p))
+                {
+                    if(this.grille[j][i] instanceof Roi && this.grille[j][i].couleur == couleur)
+                    {
+                        positionRoi = new Point(j, i);
+                    }
+                }
+            }
+         }
+        
+//On parcourt le plateau
+        for(int i=0; i<8; i++) {
+            for(int j=0; j<8; j++) {
+                Point ptemp = new Point(j,i);
+                
+                //On test si il y a quelque chose dans la case
+                if(!this.estLibre(ptemp)) {
+                    //Si la piece n'est pas de la même couleur que le roi alors on test si elle peut le manger
+                    if(this.getGrillePlateau()[j][i].couleur != couleur) {
+                        Coup c = new Coup(ptemp, positionRoi);
+                        boolean coul = this.getGrillePlateau()[j][i].couleur;
+                        //Si elle peut manger le roi alors le roi est en échec
+                        if(this.getGrillePlateau()[j][i].estValideCoup(c, coul)) {
+                            //this.estEnEchec = true;
+                            res = true;
+                        }
+                    }
+                }
+            }
+        }
+        
+        return res;
+    }*/
+    
+    public boolean echecEtMat(boolean couleur) {
+        boolean res = true;
+        
+        //On parcourt notre plateau
+        for(int i = 0; i<8; i++) {
+            for(int j=0; j<8; j++) {
+                Point p = new Point(j, i);
+                //Si il y a une piece sur la case
+                if(!this.estLibre(p)) {
+                    //si c'est une piece de ma couleur
+                    if(this.grille[j][i].couleur == couleur) {
+                        Point[] tabCoup = this.grille[j][i].EnsembleCoup();
+                        //si il n'y a au moins un coup possible alors il n'y a pas echec et mat
+                        if(tabCoup[0] != null) {
+                            res = false;
+                        }
+                    }
+                }
+            }
+        }
+        return res;
     }
     
 }

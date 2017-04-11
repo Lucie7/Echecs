@@ -11,9 +11,9 @@ package Modele;
  */
 public class Reine extends Piece{
     
-     public Reine(Point poi, Plateau pla, boolean cou)
+     public Reine(Point poi, Plateau pla, boolean cou, String url)
      {
-        super(poi,pla,cou);
+        super(poi,pla,cou,url);
      }
 
     @Override
@@ -93,6 +93,7 @@ public class Reine extends Piece{
         return chemin;   
     }
 
+    /*
     @Override
     boolean estValideDirection(Coup c)
     {
@@ -117,5 +118,31 @@ public class Reine extends Piece{
         }
         
         return res;
-    } 
+    }*/
+    
+    @Override
+    boolean estValideDirection(Coup c)
+    {
+        boolean res = false;
+        
+        //Si la pièce est dans le plateau
+        if(c.getArrivee().getX() >= 0 && c.getArrivee().getX() < 8 && c.getArrivee().getY() >= 0 && c.getArrivee().getY() < 8)
+        {
+            //Si le déplacement est en diagonale
+            if(Math.abs(c.getArrivee().getX() - c.getDepart().getX()) == Math.abs(c.getArrivee().getY() - c.getDepart().getY()))
+            {
+                res = true;
+            }//Sinon si le déplacement est horizontal
+            else if(c.getDepart().getY() == c.getArrivee().getY() && c.getDepart().getX() != c.getArrivee().getX())
+            {
+                res = true;
+            } //Sinon si le déplacement est vertical
+            else if(c.getDepart().getX() == c.getArrivee().getX() && c.getDepart().getY() == c.getArrivee().getY())
+            {
+                res = true;
+            }
+        }
+        
+        return res;
+    }
 }

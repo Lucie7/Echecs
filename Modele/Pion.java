@@ -5,6 +5,8 @@
  */
 package Modele;
 
+import static java.lang.Math.abs;
+
 /**
  *
  * @author testfatoslocal
@@ -13,16 +15,16 @@ public class Pion extends Piece{
     
     private boolean premierDeplacement;
     
-    public Pion(Point poi, Plateau pla, boolean cou)
+    public Pion(Point poi, Plateau pla, boolean cou, String url)
     {
-        super(poi,pla,cou);
+        super(poi,pla,cou,url);
         this.premierDeplacement = true;
     }
 
     @Override
     public Point[] getCheminDeplacement(Coup c)
     {
-        int tailleAReserver = c.getArrivee().getY() - c.getDepart().getY();
+        int tailleAReserver = abs(c.getArrivee().getY() - c.getDepart().getY());
         Point[] res = new Point[tailleAReserver];
         
         Point temp1;
@@ -44,11 +46,11 @@ public class Pion extends Piece{
             
             if(this.couleur == true)
             {
-                temp2 = new Point(c.getDepart().getY()-2,c.getDepart().getX());
+                temp2 = new Point(c.getDepart().getY()+2,c.getDepart().getX());
             }
             else
             {
-                temp2 = new Point(c.getDepart().getY()+2,c.getDepart().getX());
+                temp2 = new Point(c.getDepart().getY()-2,c.getDepart().getX());
             }
             
             res[1] = temp2;
@@ -101,7 +103,7 @@ public class Pion extends Piece{
                         if(this.premierDeplacement == true)
                         {
                             //test si il respecte le bon nombre de deplacement et qu'il se deplace obligatoirement
-                            if(((c.getDepart().getY())-(c.getArrivee().getY())<=2)&&(((c.getDepart().getY())-(c.getArrivee().getY())>0)))
+                            if((abs((c.getDepart().getY())-(c.getArrivee().getY()))<=2)&&((abs((c.getDepart().getY())-(c.getArrivee().getY()))>0)))
                             {
                                 res = true;
                                 this.premierDeplacement = false;
@@ -109,7 +111,7 @@ public class Pion extends Piece{
                         }
                         else
                         {
-                            if( ( (c.getDepart().getY() ) - (c.getArrivee().getY() ) == 1 ) )
+                            if( ( abs((c.getDepart().getY() ) - (c.getArrivee().getY() )) == 1 ) )
                             {
                                 res = true;
                             }

@@ -23,7 +23,6 @@ public class Partie {
         this.plat = new Plateau();
         this.plat.initPlateau();
         this.estAuTourDeJ1 = true;
-        
     }
     
     public Joueur joueurSuivant()
@@ -50,26 +49,45 @@ public class Partie {
         return this.j2;
     }
     
-    public static void main(String[] args)
+    public boolean estTermineePartie(boolean couleur)
     {
-        System.out.println("HELLO");
+        boolean res = false;
         
-        Plateau plat = new Plateau();
+        if(this.plat.echecEtMat(couleur) == true)
+        {
+            res = true;
+        }
         
-        plat.initPlateau();
+        return res;
+    }
+    
+    public void JouerPartie()
+    {
+        Joueur joueurCourant = null;
+        int i = 0;
         
-        plat.AffichePlateau();
+        this.plat.AfficheDetailPlateau();
         
-        Point p1 = new Point(0, 0);
-        
-        Tour t = new Tour(p1, plat, true);
-        
-        Point p2 = new Point(3,1);
-        
-        plat.setGrille(t, p2);
-        
-        plat.AffichePlateau();
-        
-        System.out.println("BYE");
+        while(i<1/*estTermineePartie(joueurSuivant().couleur*/)
+        {
+            joueurCourant = joueurSuivant();
+            
+            Point dep = joueurCourant.pieceADeplacer();
+            Point dest = joueurCourant.deplacerPiece();
+            Coup c = new Coup(dep, dest);
+            
+            while(!this.plat.getGrillePlateau()[dep.getY()][dep.getX()].estValideCoup(c, joueurCourant.couleur))
+            {
+                dep = joueurCourant.pieceADeplacer();
+                dest = joueurCourant.deplacerPiece();
+                c.setDepart(dep);
+                c.setArrivee(dest);
+            }
+            
+            this.plat.getGrillePlateau()[dep.getY()][dep.getX()].appliquerCoup(c,joueurCourant.couleur);
+            
+            this.plat.AfficheDetailPlateau();
+            i++;
+        }
     }
 }

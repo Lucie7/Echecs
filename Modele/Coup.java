@@ -28,4 +28,12 @@ public class Coup {
         return this.arrivee;
     }
     
+    public void setDepart(Point p) {
+        this.depart = p;
+    }
+    
+    public void setArrivee(Point p) {
+        this.arrivee = p;
+    }
+    
 }

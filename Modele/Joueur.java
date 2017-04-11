@@ -30,5 +30,8 @@ public abstract class Joueur {
         return this.couleur;
     }
     
+    abstract public Point pieceADeplacer();
+    abstract public Point deplacerPiece();
+    
     
 }

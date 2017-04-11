@@ -11,9 +11,9 @@ package Modele;
  */
 public class Tour extends Piece{
     
-    public Tour(Point poi, Plateau pla, boolean cou)
+    public Tour(Point poi, Plateau pla, boolean cou,String url)
     {
-        super(poi,pla,cou);
+        super(poi,pla,cou,url);
     }
 
     @Override
@@ -61,7 +61,8 @@ public class Tour extends Piece{
         return chemin;
     }
 
-    @Override
+    /*
+@Override
     boolean estValideDirection(Coup c)
     {
         boolean res = false;
@@ -75,6 +76,29 @@ public class Tour extends Piece{
                 res = true;
             } //Sinon si le déplacement est vertical
             else if(c.getDepart().getX() == c.getArrivee().getX()) //ET y départ != de y arrivée ?
+            {
+                res = true;
+            }
+        }
+        
+        return res;
+    }
+*/
+    
+    @Override
+    boolean estValideDirection(Coup c)
+    {
+        boolean res = false;
+        
+        //Si la pièce est dans le plateau
+        if(c.getArrivee().getX() >= 0 && c.getArrivee().getX() < 8 && c.getArrivee().getY() >= 0 && c.getArrivee().getY() < 8)
+        {
+            //Si le déplacement est horizontal
+            if(c.getDepart().getY() == c.getArrivee().getY() && c.getDepart().getX() != c.getArrivee().getX())
+            {
+                res = true;
+            } //Sinon si le déplacement est vertical
+            else if(c.getDepart().getX() == c.getArrivee().getX() && c.getDepart().getY() == c.getArrivee().getY())
             {
                 res = true;
             }
