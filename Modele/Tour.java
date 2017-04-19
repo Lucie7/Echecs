@@ -60,29 +60,6 @@ public class Tour extends Piece{
         return chemin;
     }
 
-    /*
-@Override
-    boolean estValideDirection(Coup c)
-    {
-        boolean res = false;
-        
-        //Si la pièce est dans le plateau
-        if(c.getArrivee().getX() >= 0 && c.getArrivee().getX() < 8 && c.getArrivee().getY() >= 0 && c.getArrivee().getY() < 8)
-        {
-            //Si le déplacement est horizontal
-            if(c.getDepart().getY() == c.getArrivee().getY()) //ET x départ != de x d'arrivée ?
-            {
-                res = true;
-            } //Sinon si le déplacement est vertical
-            else if(c.getDepart().getX() == c.getArrivee().getX()) //ET y départ != de y arrivée ?
-            {
-                res = true;
-            }
-        }
-        
-        return res;
-    }
-*/
     
     @Override
     boolean estValideDirection(Coup c)
@@ -92,21 +69,16 @@ public class Tour extends Piece{
         //Si la pièce est dans le plateau
         if(c.getArrivee().getX() >= 0 && c.getArrivee().getX() < 8 && c.getArrivee().getY() >= 0 && c.getArrivee().getY() < 8)
         {
-            System.out.println("a");
             //Si le déplacement est horizontal
             if((c.getDepart().getY() == c.getArrivee().getY()) && (c.getDepart().getX() != c.getArrivee().getX()))
             {
-                System.out.println("b");
                 res = true;
             } //Sinon si le déplacement est vertical
             else if((c.getDepart().getX() == c.getArrivee().getX()) && (c.getDepart().getY() != c.getArrivee().getY()))
             {
-                System.out.println("c");
                 res = true;
             }
-            System.out.println("d");
         }
-        System.out.println("e");
         
         return res;
     }

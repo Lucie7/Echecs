@@ -11,6 +11,7 @@ import java.util.Observable;
  *
  * @author testfatoslocal
  */
+
 public class Plateau /*extends Observable*/{
     
     private Piece[][] grille;
@@ -23,6 +24,8 @@ public class Plateau /*extends Observable*/{
     public void initPlateau()
     {
         int i,j,k;
+        
+        //on place chaque piece sur les cases du plateau
         
         Point posRoiJ1 = new Point(0, 4);
         Point posRoiJ2 = new Point(7, 4);
@@ -130,16 +133,10 @@ public class Plateau /*extends Observable*/{
     
     public boolean estLibre(Point p)
     {
-        System.out.println("debut estLibre");
         boolean res = false;
         if(grille[p.getY()][p.getX()] == null)
         {
-            System.out.println("if de estLibre");
             res = true;
-        }
-        else
-        {
-            System.out.println("case " + p.getY() +","+ (p.getX()) + " non libre");
         }
         
         return res;
@@ -155,11 +152,12 @@ public class Plateau /*extends Observable*/{
         return this.grille;
     }
 
-
-    public void setGrille(Piece pi, Point po) {
+    public void setGrille(Piece pi, Point po)
+    {
         this.grille[po.getY()][po.getX()] = pi;
     }
     
+    //methode permettant d'avoir un affichage en mode console du plateau
     public void AffichePlateau()
     {
         int i, j;
@@ -181,6 +179,7 @@ public class Plateau /*extends Observable*/{
         }
     }
     
+    //methode permettant d'avoir un affichage precis en mode console du plateau
     public void AfficheDetailPlateau()
     {
         int i, j;
@@ -219,7 +218,6 @@ public class Plateau /*extends Observable*/{
                     {
                         System.out.print("!\t");
                     }
-                    
                 }
                 else
                 {
@@ -230,123 +228,117 @@ public class Plateau /*extends Observable*/{
         }
     }
     
-   /*
-    public boolean estEnEchecRoi(boolean couleur) {
+    //methode permettant de recuperer la position d'un roi blanc ou noir
+    public Point getPositionRoi(boolean coul)
+    {
+        int i, j;
+        Point res = null;
+        
+        for(i=0; i<8; i++)
+        {
+            for(j=0; j<8; j++)
+            {
+                if(this.grille[i][j] instanceof Roi && this.grille[i][j].couleur == coul)
+                {
+                    res = new Point(i, j);
+                }
+            }
+        }
+        
+        return res;
+    }
+    
+    /*
+    //methode permettant de savoir si le roi blanc ou le roi noir est en echec
+    public boolean estEnEchecRoi(boolean couleur)
+    {
         boolean res = false;
         int i, j;
         Point positionRoi = null;
         
         //On créé un tableau qui va contenir des 0 et des 1
-        //Il y aura un 1 si il y a une piece(qui n'est pas le roi) sur la case ou si une des pieces adverse peut se déplacer dessus
+        //Il y aura un 1 si il y a une piece(qui n'est pas le roi) sur la case ou si une des piece adverse peut se déplacer dessus
         int[][] tableau = new int[8][8];
         //On initialise le tableau:
-        for(i=0; i<8; i++) {
-            for(j=0; j<8; j++) {
+        for(i=0; i<8; i++)
+        {
+            for(j=0; j<8; j++)
+            {
                 tableau[j][i] = 0;
             }
         }
         
         //On parcourt le plateau pour trouver le roi
         //Et on remplit notre tableau avec des 1 si il y a une piece ou si une piece peut se dépacer dessus
-        for(i = 0; i<8; i++) {
-            for(j=0; j<8; j++) {
+        for(i = 0; i<8; i++)
+        {
+            for(j=0; j<8; j++)
+            {
                 Point p = new Point(j, i);
+                
                 //Si il y a une piece sur la case
-                if(!this.estLibre(p)) {
+                if(!this.estLibre(p))
+                {
                     //Si la piece est un roi de la couleur qu'on cherche
-                    if((this.grille[j][i] instanceof Roi) && (this.grille[j][i].couleur == couleur)) {
+                    if((this.grille[j][i] instanceof Roi) && (this.grille[j][i].couleur == couleur))
+                    {
                         positionRoi = new Point(j,i);
-                        //Si ce n'est pas le roi que l'on cherche alors on met un un dans le tableau
                     }
-                    else {
+                    else //Si ce n'est pas le roi que l'on cherche alors on met un un dans le tableau
+                    {
                         tableau[j][i] = 1;
                         
                         //Si la piece est une piece adverse alors on met un 1 partout où elle peut se déplacer
-                        if(this.grille[j][i].couleur != couleur) {
-                            Point[] tabCoupPossible = this.grille[j][i].EnsembleCoup();
-                        
-                            int k = 0;
-                            while(tabCoupPossible[k] != null) {
-                                tableau[tabCoupPossible[k].getY()][tabCoupPossible[k].getX()] = 1;
-                                k++;
-                            }
+                        if(this.grille[j][i].couleur != couleur)
+                        {
+                             Point[] tabCoupPossible = this.grille[j][i].EnsembleCoup();
+                            
+                             int k = 0;
+                             
+                             while(tabCoupPossible[k] != null)
+                             {
+                                 tableau[tabCoupPossible[k].getY()][tabCoupPossible[k].getX()] = 1;
+                                 k++;
+                             }
                         }
                     }
                 }
             }
         }
         
+        
         //Maintenant, on a la position du roi et une grille rempli de 0 et de 1
         //Si le roi est sur un 1 alors il est en echec
-        if(tableau[positionRoi.getY()][positionRoi.getX()] == 1){
+        if(tableau[positionRoi.getY()][positionRoi.getX()] == 1)
+        {
             res = true;
-            //this.grille[positionRoi.getY()][positionRoi.getX()].setEstEnEchec(true);
         }
         
         return res;
     }
     */
     
-
-    
-    /*public boolean estEnEchecRoi(boolean couleur) {
-        
-        boolean res = false;
-        Point positionRoi = null;
-        
-         for(int i=0; i<8; i++) {
-            for(int j=0; j<8; j++) {
-                Point p = new Point(j, i);
-                
-                if(!this.estLibre(p))
-                {
-                    if(this.grille[j][i] instanceof Roi && this.grille[j][i].couleur == couleur)
-                    {
-                        positionRoi = new Point(j, i);
-                    }
-                }
-            }
-         }
-        
-//On parcourt le plateau
-        for(int i=0; i<8; i++) {
-            for(int j=0; j<8; j++) {
-                Point ptemp = new Point(j,i);
-                
-                //On test si il y a quelque chose dans la case
-                if(!this.estLibre(ptemp)) {
-                    //Si la piece n'est pas de la même couleur que le roi alors on test si elle peut le manger
-                    if(this.getGrillePlateau()[j][i].couleur != couleur) {
-                        Coup c = new Coup(ptemp, positionRoi);
-                        boolean coul = this.getGrillePlateau()[j][i].couleur;
-                        //Si elle peut manger le roi alors le roi est en échec
-                        if(this.getGrillePlateau()[j][i].estValideCoup(c, coul)) {
-                            //this.estEnEchec = true;
-                            res = true;
-                        }
-                    }
-                }
-            }
-        }
-        
-        return res;
-    }*/
-    
     /*
-    public boolean echecEtMat(boolean couleur) {
+    public boolean echecEtMat(boolean couleur)
+    {
         boolean res = true;
         
         //On parcourt notre plateau
-        for(int i = 0; i<8; i++) {
-            for(int j=0; j<8; j++) {
+        for(int i = 0; i<8; i++)
+        {
+            for(int j=0; j<8; j++)
+            {
                 Point p = new Point(j, i);
                 //Si il y a une piece sur la case
-                if(!this.estLibre(p)) {
+                if(!this.estLibre(p))
+                {
                     //si c'est une piece de ma couleur
-                    if(this.grille[j][i].couleur == couleur) {
+                    if(this.grille[j][i].couleur == couleur)
+                    {
                         Point[] tabCoup = this.grille[j][i].EnsembleCoup();
                         //si il n'y a au moins un coup possible alors il n'y a pas echec et mat
-                        if(tabCoup[0] != null) {
+                        if(tabCoup[0] != null)
+                        {
                             res = false;
                         }
                     }
@@ -356,5 +348,6 @@ public class Plateau /*extends Observable*/{
         return res;
     }
 */
+
     
 }

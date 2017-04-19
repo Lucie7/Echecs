@@ -92,33 +92,6 @@ public class Reine extends Piece{
         
         return chemin;   
     }
-
-    /*
-    @Override
-    boolean estValideDirection(Coup c)
-    {
-        boolean res = false;
-        
-        //Si la pièce est dans le plateau
-        if(c.getArrivee().getX() >= 0 && c.getArrivee().getX() < 8 && c.getArrivee().getY() >= 0 && c.getArrivee().getY() < 8)
-        {
-            //Si le déplacement est en diagonale
-            if(Math.abs(c.getArrivee().getX() - c.getDepart().getX()) == Math.abs(c.getArrivee().getY() - c.getDepart().getY()))
-            {
-                res = true;
-            }//Sinon si le déplacement est horizontal
-            else if(c.getDepart().getY() == c.getArrivee().getY()) //ET x départ != de x d'arrivée ?
-            {
-                res = true;
-            } //Sinon si le déplacement est vertical
-            else if(c.getDepart().getX() == c.getArrivee().getX()) //ET y départ != de y arrivée ?
-            {
-                res = true;
-            }
-        }
-        
-        return res;
-    }*/
     
     @Override
     boolean estValideDirection(Coup c)
@@ -131,7 +104,10 @@ public class Reine extends Piece{
             //Si le déplacement est en diagonale
             if(Math.abs(c.getArrivee().getX() - c.getDepart().getX()) == Math.abs(c.getArrivee().getY() - c.getDepart().getY()))
             {
-                res = true;
+                if(c.getArrivee().getY() != c.getDepart().getY())
+                {
+                    res = true;
+                }
             }//Sinon si le déplacement est horizontal
             else if(c.getDepart().getY() == c.getArrivee().getY() && c.getDepart().getX() != c.getArrivee().getX())
             {

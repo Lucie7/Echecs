@@ -73,7 +73,10 @@ public class Fou extends Piece{
             //Si le déplacement est bien en diagonale
             if(Math.abs(c.getArrivee().getX() - c.getDepart().getX()) == Math.abs(c.getArrivee().getY() - c.getDepart().getY()))
             {
-                res = true;
+                if(c.getArrivee().getY() != c.getDepart().getY())
+                {
+                    res = true;
+                }
             }
         }
         

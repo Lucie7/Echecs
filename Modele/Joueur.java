@@ -33,10 +33,10 @@ public abstract class Joueur {
         return this.couleur;
     }
     
-    //methode abstraite qui permet de choisir quelle piece du plateau on veut deplacer en revoyant sa coordonnee
+    //methode abstraite qui permet de choisir quelle piece du plateau on veut deplacer en renvoyant sa coordonnee
     abstract public Point pieceADeplacer();
     
-    //methode abstraite qui permet de deplacer une piece du plateau en renvoyant les coordonnee d'arrivee
+    //methode abstraite qui permet de deplacer une piece du plateau en renvoyant les coordonnees d'arrivee
     abstract public Point deplacerPiece();
     
     

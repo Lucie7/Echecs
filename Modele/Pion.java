@@ -65,7 +65,6 @@ public class Pion extends Piece{
     @Override
     boolean estValideDirection(Coup c)
     {
-        System.out.println("VOICI LE BOOL : " + this.premierDeplacement);
         boolean res = false;
         
         //test si au depart il est bien dans les dimensions de la grille
@@ -80,19 +79,15 @@ public class Pion extends Piece{
                     //si la case devant le pion est vide
                     if(this.p.getGrillePlateau()[c.getDepart().getY()+1][c.getDepart().getX()] == null)
                     {
-                        System.out.println("hohohohoho");
                         //test si il se deplace vers le bas et uniquement sur l'axe des ordonnee
                         if(c.getDepart().getY() < c.getArrivee().getY() && c.getArrivee().getX() == c.getDepart().getX())
                         {
-                            System.out.println("hahahaahah");
                             //test si c'est le premier deplacement du pion
                             if(this.premierDeplacement == true)
                             {
-                                System.out.println("hihihhihihih");
                                 //test si il respecte le bon nombre de deplacement
                                 if(((c.getArrivee().getY()) - (c.getDepart().getY()) <= 2) /*&& ((c.getArrivee().getY()) - (c.getDepart().getY()) > 0)*/)
                                 {
-                                    System.out.println("huhhuhuhhuhu");
                                     //dans ce cas le pion peut se deplacer
                                     res = true;
                                     //on met le booleen testant si c'est le premier deplacement du pion a faux
@@ -110,19 +105,14 @@ public class Pion extends Piece{
                         }
                     }
                     
-                    System.out.println("papapaapapa");
-                    
-                    
                     if(c.getDepart().getX() != 7)
                     {
                        
                         //si il y a un pion adverse dans la diagonale à gauche du pion il peut se deplacer
                         if((this.p.getGrillePlateau()[c.getDepart().getY()+1][c.getDepart().getX()+1] != null)/* && (this.p.getGrillePlateau()[c.getDepart().getY()+1][c.getDepart().getX()+1].couleur != this.couleur)*/)
                         {
-                            System.out.println("popopopopo");
                             if(this.p.getGrillePlateau()[c.getDepart().getY()+1][c.getDepart().getX()+1].couleur != this.couleur)
                             {
-                                System.out.println("pipipipipi");
                                 if(c.getArrivee().getY() == c.getDepart().getY()+1)
                                 {
                                     if(c.getArrivee().getX() == c.getDepart().getX()+1)
@@ -139,15 +129,12 @@ public class Pion extends Piece{
                         //si il y a un pion adverse dans la diagonale à droite du pion il peut se deplacer
                         if((this.p.getGrillePlateau()[c.getDepart().getY()+1][c.getDepart().getX()-1] != null)/* && (this.p.getGrillePlateau()[c.getDepart().getY()+1][c.getDepart().getX()-1].couleur != this.couleur)*/)
                         {
-                            System.out.println("lololololol");
                             if(this.p.getGrillePlateau()[c.getDepart().getY()+1][c.getDepart().getX()-1].couleur != this.couleur)
                             {
                                 if(c.getArrivee().getY() == c.getDepart().getY()+1)
                                 {
-                                    System.out.println("lalalalalala");
                                     if(c.getArrivee().getX() == c.getDepart().getX()-1)
                                     {
-                                        System.out.println("lililililili");
                                         res = true;
                                     }
                                 }

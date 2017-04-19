@@ -21,7 +21,7 @@ public class Partie {
         this.j1 = jou1;
         this.j2 = jou2;
         this.plat = new Plateau();
-        this.plat.initPlateau(); //initialise le plateau avec les pieces placer au bonne coordonnee
+        this.plat.initPlateau(); //initialise le plateau avec les pieces placer aux bonnes coordonnees
         this.estAuTourDeJ1 = true; //on commence la partie avec le j1
     }
     
@@ -54,7 +54,7 @@ public class Partie {
     //methode qui permet de fixer les condition de fin de partie, dans notre cas si on a echec et mat
     public boolean estTermineePartie(boolean couleur)
     {
-        //comme nos fonction permettant de tester si le roi est en echec ne fonctionne pas, on ne peut pas
+        //comme nos fonctions permettant de tester si le roi est en echec ne fonctionne pas, on ne peut pas
         //completer la methode estTermineePartie
         boolean res = false;
         
@@ -76,29 +76,26 @@ public class Partie {
         {
             //de base d'apres notre methode joueurSuivant, ici c'est le joueur1 qui est renvoyé
             joueurCourant = joueurSuivant();
+            System.out.println("C'est au tour de "+joueurCourant.getJoueurNom());
             
             //on recupere les coordonne servant à appliquer le coup du joueur
             Point dep = joueurCourant.pieceADeplacer();
             Point dest = joueurCourant.deplacerPiece();
             Coup c = new Coup(dep, dest);
-            
-            System.out.println("ici on est avant le while");
-            
-            while(!this.plat.getGrillePlateau()[dep.getY()][dep.getX()].estValideCoup(c, joueurCourant.couleur))
+                      
+            //tant que le coup de la piece choisie n'est pas valide
+            while(!this.plat.getGrillePlateau()[c.getDepart().getY()][c.getDepart().getX()].estValideCoup(c, joueurCourant.couleur))
             {
-                System.out.println("ici on est dans le while");
+                System.out.println();
+                System.out.println("Pas autorise, veuillez recommencez");
                 dep = joueurCourant.pieceADeplacer();
                 dest = joueurCourant.deplacerPiece();
-                System.out.println("avant les set");
                 c.setDepart(dep);
                 c.setArrivee(dest);
-                System.out.println("apres les set");
             }
             
-            System.out.println("ici on est pas dans le while");
-            //this.plat.getGrillePlateau()[dep.getY()][dep.getX()].appliquerCoup(c,joueurCourant.couleur);
+            //appliquer le coup de la piece
             this.plat.getGrillePlateau()[dep.getY()][dep.getX()].appliquerDirectementCoup(c);
-            System.out.println("apres le applik coup");
             
             this.plat.AfficheDetailPlateau();
             i++;

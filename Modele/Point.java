@@ -5,8 +5,6 @@
  */
 package Modele;
 
-import javafx.scene.layout.BorderPane;
-
 /**
  *
  * @author testfatoslocal

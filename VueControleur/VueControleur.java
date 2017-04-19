@@ -49,13 +49,12 @@ import javafx.scene.text.TextAlignment;
  
 public class VueControleur extends Application
 {
-    //Text affichage;
     @Override
     public void start(Stage primaryStage) {
         
         Group root = new Group();
         Scene scene = new Scene(root,Color.AQUAMARINE);
-        //Scene scene = new Scene(root, 500, 500, Color.AQUAMARINE);
+        
         GridPane gp = new GridPane();
         
         Plateau plat = new Plateau();
@@ -65,7 +64,6 @@ public class VueControleur extends Application
         afficheVueGrille(gp, plat);
         
         root.getChildren().add(gp);
-        //Scene scene = new Scene(root, 700, 500, Color.BEIGE);
         
         primaryStage.setTitle("Echecs");
         primaryStage.setScene(scene);
@@ -75,9 +73,6 @@ public class VueControleur extends Application
     public void afficheVueGrille(GridPane echiquier, Plateau pl)
     {
         int j;
-        
-        // gestion du placement (permet de palcer le champ Text affichage en haut, et GridPane gPane au centre)
-        //BorderPane border = new BorderPane();
         
         int column = 0;
         int row = 0;
@@ -143,7 +138,6 @@ public class VueControleur extends Application
                                                 
                         if(!pl.estLibre(new Point(ligneDepart, colonneDepart)))
                         {
-                           // n.setStyle("-fx-border-color: #2200FF");
                             n.setStyle("-fx-background-color: #C8E578");
                             
                             for(Node n2 : echiquier.getChildren())
@@ -160,8 +154,9 @@ public class VueControleur extends Application
                                             Point dep = new Point(ligneDepart, colonneDepart);
                                             Point dest = new Point(ligneDest, colonneDest);
                                             Coup c = new Coup(dep, dest);
-                                            pl.AfficheDetailPlateau();
+                                            
                                             pl.getGrillePlateau()[ligneDepart][colonneDepart].appliquerCoup(c,pl.getGrillePlateau()[ligneDepart][colonneDepart].getPieceCouleur());
+                                            
                                             pl.AfficheDetailPlateau();
                                             afficheVueGrille(echiquier, pl);
                                         }
@@ -173,8 +168,6 @@ public class VueControleur extends Application
                 }
             });
         }
-    
-        //border.setTop(echiquier);
 
     }
 
