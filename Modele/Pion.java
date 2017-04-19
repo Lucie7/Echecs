@@ -13,7 +13,7 @@ import static java.lang.Math.abs;
  */
 public class Pion extends Piece{
     
-    private boolean premierDeplacement;
+    public boolean premierDeplacement; //boolean pour savoir si c'est le premier deplacement du pion
     
     public Pion(Point poi, Plateau pla, boolean cou, String url)
     {
@@ -24,11 +24,13 @@ public class Pion extends Piece{
     @Override
     public Point[] getCheminDeplacement(Coup c)
     {
+        //la taille a reserver depend si c'est le premier deplacement ou non du pion
         int tailleAReserver = abs(c.getArrivee().getY() - c.getDepart().getY());
         Point[] res = new Point[tailleAReserver];
         
         Point temp1;
         
+        //si c'est le joueur1, le joueur du haut
         if(this.couleur == true)
         {
             temp1 = new Point(c.getDepart().getY()+1,c.getDepart().getX());
@@ -40,6 +42,7 @@ public class Pion extends Piece{
         
         res[0] = temp1;
         
+        //si c'est le premier deplacement du pion
         if(tailleAReserver == 2)
         {
             Point temp2;
@@ -62,58 +65,150 @@ public class Pion extends Piece{
     @Override
     boolean estValideDirection(Coup c)
     {
+        System.out.println("VOICI LE BOOL : " + this.premierDeplacement);
         boolean res = false;
         
         //test si au depart il est bien dans les dimensions de la grille
-        if((c.getDepart().getY() > 0) && (c.getDepart().getY() < 8))
+        if((c.getDepart().getY() >= 0) && (c.getDepart().getY() < 8))
         {
-            //test si à l'arrivee il s'est bien deplacer d'au moin une case et qui'il ne depasse pas la grille
-            if(c.getArrivee().getY() > 1 && c.getArrivee().getY() < 8)
+            //test si à l'arrivee il ne depasse pas la grille
+            if(c.getArrivee().getY() >= 0 && c.getArrivee().getY() < 8)
             {
+                //si c'est le joueur du haut
                 if(this.couleur == true)
                 {
-                    //test si il se deplace vers en haut et uniquement sur l'axe verticale
-                    if(c.getDepart().getY() < c.getArrivee().getY() && c.getArrivee().getX() == c.getDepart().getX())
+                    //si la case devant le pion est vide
+                    if(this.p.getGrillePlateau()[c.getDepart().getY()+1][c.getDepart().getX()] == null)
                     {
-                        //test si c'est le premier coup de la partie
-                        if(this.premierDeplacement == true)
+                        System.out.println("hohohohoho");
+                        //test si il se deplace vers le bas et uniquement sur l'axe des ordonnee
+                        if(c.getDepart().getY() < c.getArrivee().getY() && c.getArrivee().getX() == c.getDepart().getX())
                         {
-                            //test si il respecte le bon nombre de deplacement et qu'il se deplace obligatoirement
-                            if(((c.getArrivee().getY()) - (c.getDepart().getY()) <= 2) && ((c.getArrivee().getY()) - (c.getDepart().getY()) > 0))
+                            System.out.println("hahahaahah");
+                            //test si c'est le premier deplacement du pion
+                            if(this.premierDeplacement == true)
                             {
-                                res = true;
-                                this.premierDeplacement = false;
+                                System.out.println("hihihhihihih");
+                                //test si il respecte le bon nombre de deplacement
+                                if(((c.getArrivee().getY()) - (c.getDepart().getY()) <= 2) /*&& ((c.getArrivee().getY()) - (c.getDepart().getY()) > 0)*/)
+                                {
+                                    System.out.println("huhhuhuhhuhu");
+                                    //dans ce cas le pion peut se deplacer
+                                    res = true;
+                                    //on met le booleen testant si c'est le premier deplacement du pion a faux
+                                    this.premierDeplacement = false;
+                                }
+                            }
+                            else
+                            {
+                                //test si il respecte le bon nombre de deplacement
+                                if(((c.getArrivee().getY()) - (c.getDepart().getY()) == 1))
+                                {
+                                    res = true;
+                                }
                             }
                         }
-                        else
+                    }
+                    
+                    System.out.println("papapaapapa");
+                    
+                    
+                    if(c.getDepart().getX() != 7)
+                    {
+                       
+                        //si il y a un pion adverse dans la diagonale à gauche du pion il peut se deplacer
+                        if((this.p.getGrillePlateau()[c.getDepart().getY()+1][c.getDepart().getX()+1] != null)/* && (this.p.getGrillePlateau()[c.getDepart().getY()+1][c.getDepart().getX()+1].couleur != this.couleur)*/)
                         {
-                            if(((c.getArrivee().getY()) - (c.getDepart().getY()) == 1))
+                            System.out.println("popopopopo");
+                            if(this.p.getGrillePlateau()[c.getDepart().getY()+1][c.getDepart().getX()+1].couleur != this.couleur)
                             {
-                                res = true;
+                                System.out.println("pipipipipi");
+                                if(c.getArrivee().getY() == c.getDepart().getY()+1)
+                                {
+                                    if(c.getArrivee().getX() == c.getDepart().getX()+1)
+                                    {
+                                        res = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    if(c.getDepart().getX() != 0)
+                    {
+                        //si il y a un pion adverse dans la diagonale à droite du pion il peut se deplacer
+                        if((this.p.getGrillePlateau()[c.getDepart().getY()+1][c.getDepart().getX()-1] != null)/* && (this.p.getGrillePlateau()[c.getDepart().getY()+1][c.getDepart().getX()-1].couleur != this.couleur)*/)
+                        {
+                            System.out.println("lololololol");
+                            if(this.p.getGrillePlateau()[c.getDepart().getY()+1][c.getDepart().getX()-1].couleur != this.couleur)
+                            {
+                                if(c.getArrivee().getY() == c.getDepart().getY()+1)
+                                {
+                                    System.out.println("lalalalalala");
+                                    if(c.getArrivee().getX() == c.getDepart().getX()-1)
+                                    {
+                                        System.out.println("lililililili");
+                                        res = true;
+                                    }
+                                }
                             }
                         }
                     }
                 }
                 else
                 {
-                    //test si il se deplace en bas et uniquement sur l'axe verticale
-                    if(c.getDepart().getY() > c.getArrivee().getY() && c.getArrivee().getX() == c.getDepart().getX())
+                    //si la case devant le pion est vide
+                    if(this.p.getGrillePlateau()[c.getDepart().getY()-1][c.getDepart().getX()] == null)
                     {
-                        //test si c'est le premier coup de la partie
-                        if(this.premierDeplacement == true)
+                        //test si il se deplace vers le haut et uniquement sur l'axe des ordonnee
+                        if( (c.getDepart().getY() > c.getArrivee().getY()) && (c.getArrivee().getX() == c.getDepart().getX()) )
                         {
-                            //test si il respecte le bon nombre de deplacement et qu'il se deplace obligatoirement
-                            if((abs((c.getDepart().getY())-(c.getArrivee().getY()))<=2)&&((abs((c.getDepart().getY())-(c.getArrivee().getY()))>0)))
+                             //test si c'est le premier deplacement du pion
+                            if(this.premierDeplacement == true)
                             {
-                                res = true;
-                                this.premierDeplacement = false;
+                               //test si il respecte le bon nombre de deplacement
+                                if((abs((c.getDepart().getY())-(c.getArrivee().getY()))<=2)/*&&((abs((c.getDepart().getY())-(c.getArrivee().getY()))>0))*/)
+                                {
+                                    res = true;
+                                    this.premierDeplacement = false;
+                                }
+                            }
+                            else
+                            {
+                                if( abs( ( c.getDepart().getY() - c.getArrivee().getY() ) ) == 1 ) 
+                                {
+                                    res = true;
+                                }
                             }
                         }
-                        else
+                    }
+                    
+                    if(c.getDepart().getX() != 7)
+                    {
+                        //si il y a un pion adverse dans la diagonale à droite du pion il peut se deplacer
+                        if((this.p.getGrillePlateau()[c.getDepart().getY()-1][c.getDepart().getX()+1] != null) && (this.p.getGrillePlateau()[c.getDepart().getY()-1][c.getDepart().getX()+1].couleur != this.couleur))
                         {
-                            if( ( abs((c.getDepart().getY() ) - (c.getArrivee().getY() )) == 1 ) )
+                            if(c.getArrivee().getY() == c.getDepart().getY()-1)
                             {
-                                res = true;
+                                if(c.getArrivee().getX() == c.getDepart().getX()+1)
+                                {
+                                    res = true;
+                                }
+                            }
+                        }
+                    }
+                    
+                    if(c.getDepart().getX() != 0)
+                    {
+                        //si il y a un pion adverse dans la diagonale à gauche du pion il peut se deplacer
+                        if((this.p.getGrillePlateau()[c.getDepart().getY()-1][c.getDepart().getX()-1] != null) && (this.p.getGrillePlateau()[c.getDepart().getY()-1][c.getDepart().getX()-1].couleur != this.couleur))
+                        {
+                            if(c.getArrivee().getY() == c.getDepart().getY()-1)
+                            {
+                                if(c.getArrivee().getX() == c.getDepart().getX()-1)
+                                {
+                                    res = true;
+                                }
                             }
                         }
                     }

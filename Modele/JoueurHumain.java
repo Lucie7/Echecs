@@ -21,14 +21,14 @@ public class JoueurHumain extends Joueur{
     @Override
     public Point pieceADeplacer()
     {
-        int abs;
-        int ord;
+        int abs; //la coordonne sur l'axe vertical
+        int ord; //la coordonne sur l'axe horizontal
         
         Scanner sc = new Scanner(System.in);
         
-        System.out.println("Ligne de la piece a bouger : ");
+        System.out.println("Ligne de la piece a deplacer : ");
         ord = sc.nextInt();
-        System.out.println("Colonne de la piece a bouger : ");
+        System.out.println("Colonne de la piece a deplacer : ");
         abs = sc.nextInt();
         
         Point depart =  new Point(ord, abs);

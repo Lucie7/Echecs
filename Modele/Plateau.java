@@ -11,7 +11,7 @@ import java.util.Observable;
  *
  * @author testfatoslocal
  */
-public class Plateau extends Observable{
+public class Plateau /*extends Observable*/{
     
     private Piece[][] grille;
     
@@ -130,11 +130,11 @@ public class Plateau extends Observable{
     
     public boolean estLibre(Point p)
     {
-        System.out.println("z");
+        System.out.println("debut estLibre");
         boolean res = false;
         if(grille[p.getY()][p.getX()] == null)
         {
-            System.out.println("w");
+            System.out.println("if de estLibre");
             res = true;
         }
         else
@@ -230,7 +230,7 @@ public class Plateau extends Observable{
         }
     }
     
-    
+   /*
     public boolean estEnEchecRoi(boolean couleur) {
         boolean res = false;
         int i, j;
@@ -254,10 +254,10 @@ public class Plateau extends Observable{
                 //Si il y a une piece sur la case
                 if(!this.estLibre(p)) {
                     //Si la piece est un roi de la couleur qu'on cherche
-                    if(this.grille[j][i] instanceof Roi && this.grille[j][i].couleur == couleur) {
+                    if((this.grille[j][i] instanceof Roi) && (this.grille[j][i].couleur == couleur)) {
                         positionRoi = new Point(j,i);
+                        //Si ce n'est pas le roi que l'on cherche alors on met un un dans le tableau
                     }
-                    //Si ce n'est pas le roi que l'on cherche alors on met un un dans le tableau
                     else {
                         tableau[j][i] = 1;
                         
@@ -267,7 +267,7 @@ public class Plateau extends Observable{
                         
                             int k = 0;
                             while(tabCoupPossible[k] != null) {
-                                tableau[tabCoupPossible[i].getY()][tabCoupPossible[i].getX()] = 1;
+                                tableau[tabCoupPossible[k].getY()][tabCoupPossible[k].getX()] = 1;
                                 k++;
                             }
                         }
@@ -285,6 +285,8 @@ public class Plateau extends Observable{
         
         return res;
     }
+    */
+    
 
     
     /*public boolean estEnEchecRoi(boolean couleur) {
@@ -330,6 +332,7 @@ public class Plateau extends Observable{
         return res;
     }*/
     
+    /*
     public boolean echecEtMat(boolean couleur) {
         boolean res = true;
         
@@ -352,5 +355,6 @@ public class Plateau extends Observable{
         }
         return res;
     }
+*/
     
 }

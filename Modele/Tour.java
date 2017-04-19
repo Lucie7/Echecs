@@ -36,17 +36,16 @@ public class Tour extends Piece{
         {
             //Si le déplacement est vertical
             if(c.getDepart().getX() == c.getArrivee().getX()) {
-                //si je vais vers l'avant
+                //si je vais vers le bas
                 if(c.getDepart().getY() < c.getArrivee().getY()) {
                     Point temp = new Point(c.getDepart().getY()+i+1, c.getDepart().getX());
                     chemin[i] = temp;
-                }else { //je me déplace vers l'arrière
+                }else { //je me déplace vers le haut
                     Point temp = new Point(c.getDepart().getY()-i-1, c.getDepart().getX());
                     chemin[i] = temp;
                 }
-                
-            //Sinon si le déplacement est horizontal
-            } else if(c.getDepart().getY() == c.getArrivee().getY()) {
+            }
+            else if(c.getDepart().getY() == c.getArrivee().getY()) {
                 //si je vais vers la droite
                 if(c.getDepart().getX() < c.getArrivee().getX()) {
                     Point temp = new Point(c.getDepart().getY(), c.getDepart().getX()+i+1);
@@ -93,16 +92,21 @@ public class Tour extends Piece{
         //Si la pièce est dans le plateau
         if(c.getArrivee().getX() >= 0 && c.getArrivee().getX() < 8 && c.getArrivee().getY() >= 0 && c.getArrivee().getY() < 8)
         {
+            System.out.println("a");
             //Si le déplacement est horizontal
-            if(c.getDepart().getY() == c.getArrivee().getY() && c.getDepart().getX() != c.getArrivee().getX())
+            if((c.getDepart().getY() == c.getArrivee().getY()) && (c.getDepart().getX() != c.getArrivee().getX()))
             {
+                System.out.println("b");
                 res = true;
             } //Sinon si le déplacement est vertical
-            else if(c.getDepart().getX() == c.getArrivee().getX() && c.getDepart().getY() == c.getArrivee().getY())
+            else if((c.getDepart().getX() == c.getArrivee().getX()) && (c.getDepart().getY() != c.getArrivee().getY()))
             {
+                System.out.println("c");
                 res = true;
             }
+            System.out.println("d");
         }
+        System.out.println("e");
         
         return res;
     }

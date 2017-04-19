@@ -47,14 +47,15 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 //import sun.java2d.loops.FillSpans;
  
-public class Vue extends Application
+public class VueControleur extends Application
 {
     //Text affichage;
     @Override
     public void start(Stage primaryStage) {
         
         Group root = new Group();
-        Scene scene = new Scene(root,Color.BEIGE);
+        Scene scene = new Scene(root,Color.AQUAMARINE);
+        //Scene scene = new Scene(root, 500, 500, Color.AQUAMARINE);
         GridPane gp = new GridPane();
         
         Plateau plat = new Plateau();
@@ -76,7 +77,7 @@ public class Vue extends Application
         int j;
         
         // gestion du placement (permet de palcer le champ Text affichage en haut, et GridPane gPane au centre)
-        BorderPane border = new BorderPane();
+        //BorderPane border = new BorderPane();
         
         int column = 0;
         int row = 0;
@@ -91,7 +92,7 @@ public class Vue extends Application
             }
             else
             {
-                rec.setFill(Color.DARKRED);
+                rec.setFill(Color.BROWN);
             }
             
             StackPane stackP = new StackPane();
@@ -129,9 +130,21 @@ public class Vue extends Application
                         int ligneDepart = GridPane.getRowIndex(n);
                         int colonneDepart = GridPane.getColumnIndex(n);
                         
+                        /*
+                        Point[] possible = pl.getGrillePlateau()[ligneDepart][colonneDepart].EnsembleCoup();
+                        
+                        for(int k = 0 ; k < possible.length ; k++)
+                        {
+                            //n.setStyle(STYLESHEET_MODENA);
+                            //echiquier.setStyle("-fx-border-color: #2200FF");
+                            GridPane.getRowIndex()
+                        }
+                        */
+                                                
                         if(!pl.estLibre(new Point(ligneDepart, colonneDepart)))
                         {
-                            n.setStyle("-fx-border-color: #FF0000");
+                           // n.setStyle("-fx-border-color: #2200FF");
+                            n.setStyle("-fx-background-color: #C8E578");
                             
                             for(Node n2 : echiquier.getChildren())
                             {
@@ -170,6 +183,6 @@ public class Vue extends Application
      */
     public static void main(String[] args) {
         //launch(args);
-        Application.launch(Vue.class,args);
+        Application.launch(VueControleur.class,args);
     }
 }

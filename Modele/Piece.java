@@ -38,17 +38,25 @@ public abstract class Piece {
     
     public void appliquerCoup(Coup c, boolean couleur)
     {
-        //if(estValideCoup(c,couleur))
-        //{
+        if(estValideCoup(c,couleur))
+        {
             System.out.println("Le coup a ete applique");
             this.position = c.getArrivee();
             this.p.setGrille(this.p.getGrillePlateau()[c.getDepart().getY()][c.getDepart().getX()],c.getArrivee());
             this.p.setGrille(null,c.getDepart());
-        //}
-        //else
-        //{
-          //  System.out.println("Le coup n'est pas possible");
-        //}
+        }
+        else
+        {
+            System.out.println("Le coup n'est pas possible");
+        }
+    }
+    
+    public void appliquerDirectementCoup(Coup c)
+    {
+        System.out.println("appliquerDirectementCoup");
+        this.position = c.getArrivee();
+        this.p.setGrille(this.p.getGrillePlateau()[c.getDepart().getY()][c.getDepart().getX()],c.getArrivee());
+        this.p.setGrille(null,c.getDepart());
     }
     
     
@@ -63,47 +71,74 @@ public abstract class Piece {
         return res;
     }
     
-   /* public boolean estValideCoup(Coup c,boolean couleur)
+    public boolean estValideCoup(Coup c,boolean couleur)
     {
-        boolean res = false;
-        System.out.println("BYE");
+        boolean res = true;
+        System.out.println("debut estValideCoup");
         
-        if(estValideCouleur(couleur, c.getDepart()))
-        {
-            System.out.println("a");
-
-            if(estValideDirection(c))
+        //if(/*(p.estEnEchecRoi(this.couleur) == true) && (this.estEnleveeEchec(c) == true)) ||*/ (this.p.estEnEchecRoi(this.couleur) == false))
+        //{
+        
+            if(estValideCouleur(couleur, c.getDepart()))
             {
-                System.out.println("b");
-                Point[] temp = getCheminDeplacement(c);
+                System.out.println("prem if estValideCouleur");
 
-                for(int i = 0; i < temp.length ; i++)
+                if(estValideDirection(c))
                 {
-                    System.out.println("c");
-                    //Si la case est libre alors on peut y aller
-		        if(this.p.estLibre(temp[i]))
-		        {
-                            System.out.println("d");
-		            res = true;
-                             //Sinon si la case est occupé par une piece qui n'est pas de notre couleur alors on peut y aller et la manger
-		        }
-		       
-		        else if(this.p.getGrillePlateau()[c.getArrivee().getY()][c.getArrivee().getX()].couleur != this.couleur) {
-		            System.out.println("e");
-                            res = true;
-		            this.p.getGrillePlateau()[c.getArrivee().getY()][c.getArrivee().getX()].estMangee();
-		        }
+                    System.out.println("sec if estValideCouleur");
+                    Point[] temp = getCheminDeplacement(c);
+
+                    for(int i = 0; i < temp.length ; i++)
+                    {
+                        System.out.println("for estValideCouleur");
+                        //Si la case est libre alors on peut y aller
+                            if(this.p.estLibre(temp[i]))
+                            {
+                                System.out.println("trois if estValideCouleur");
+                                //res = true;
+                                 //Sinon si la case est occupé par une piece qui n'est pas de notre couleur alors on peut y aller et la manger
+                            }
+                            else if( i == temp.length-1)
+                            {
+                                if(/*!estValideCouleur(this.p.getGrillePlateau()[temp[i].getY()][temp[i].getX()].couleur, temp[i])*/this.p.getGrillePlateau()[temp[i].getY()][temp[i].getX()].couleur != couleur)
+                                {
+                                    System.out.println("else estValideCouleur");
+                                    //res = true;
+                                    this.p.getGrillePlateau()[temp[i].getY()][temp[i].getX()].estMangee();
+                                }
+                                else
+                                {
+                                    res = false;
+                                }
+                            }
+                            else
+                            {
+                                System.out.println("Sur le chemin piece presente");
+                                res = false;
+                            }
+                    }
+                }
+                else
+                {
+                    res = false;
                 }
             }
-        }
-        else
-        {
-            System.out.println("Mauvaise Couleur de piece");
-        }
+            else
+            {
+                System.out.println("Mauvaise Couleur de piece");
+                res = false;
+            }
+        //}
+        //else
+        //{
+          //  System.out.println("On a echec");
+          //  res = false;
+       // }
         
         return res;
-    }*/
+    }
     
+    /*
     public boolean estValideCoup(Coup c, boolean couleur)
     {
         boolean res = false;
@@ -140,8 +175,11 @@ public abstract class Piece {
         
         return res;
     }
+*/
     
-    public boolean estEnleveeEchec(Coup c)
+    
+    /*
+public boolean estEnleveeEchec(Coup c)
     {
         boolean res = false;
         Plateau pTemp = new Plateau();
@@ -164,10 +202,14 @@ public abstract class Piece {
         
         return res;
     }
+*/
+
+
 
 	public void estMangee()
         {
             this.estVivant = false;
+            //this.p.getGrillePlateau()[this.position.getY()][this.position.getX()] = null;
         }
         
         public String getUrlImage()
@@ -180,24 +222,29 @@ public abstract class Piece {
             return this.couleur;
         }
         
-        public Point[] EnsembleCoup() {
-        Point[] res = new Point[27];
-        boolean temp;
-        int k =0;
         
-        for(int i=0; i<8; i++) {
-            for(int j=0; j<8; j++) {
-                Point p = new Point(j, i);
-                Coup c = new Coup(this.position, p);
-                temp = this.estValideCoup(c, this.couleur);
-                if(temp == true) {
-                    res[k] = p;
-                    k++;
+        public Point[] EnsembleCoup()
+        {
+            Point[] res = new Point[27];
+            boolean temp;
+            int k =0;
+
+            for(int i=0; i<8; i++)
+            {
+                for(int j=0; j<8; j++)
+                {
+                    Point p = new Point(j, i);
+                    Coup c = new Coup(this.position, p);
+                    temp = this.estValideCoup(c, this.couleur);
+                    if(temp == true)
+                    {
+                        res[k] = p;
+                        k++;
+                    }
                 }
             }
+
+            return res;
         }
-        
-        return res;
-    }
     
 }

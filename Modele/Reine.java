@@ -137,7 +137,7 @@ public class Reine extends Piece{
             {
                 res = true;
             } //Sinon si le déplacement est vertical
-            else if(c.getDepart().getX() == c.getArrivee().getX() && c.getDepart().getY() == c.getArrivee().getY())
+            else if(c.getDepart().getX() == c.getArrivee().getX() && c.getDepart().getY() != c.getArrivee().getY())
             {
                 res = true;
             }

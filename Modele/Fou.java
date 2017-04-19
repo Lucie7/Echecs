@@ -25,7 +25,7 @@ public class Fou extends Piece{
         for(int i = 0; i<chemin.length; i++)
         {
         
-            if(c.getArrivee().getY() > c.getDepart().getY()) //Si je me déplace vers l'avant
+            if(c.getArrivee().getY() > c.getDepart().getY()) //Si je me déplace vers le bas
             {
                 if(c.getArrivee().getX() > c.getDepart().getX()) //Si je me déplace vers la droite
                 {
@@ -75,10 +75,6 @@ public class Fou extends Piece{
             {
                 res = true;
             }
-        }
-        else
-        {
-            res = false;
         }
         
         return res;

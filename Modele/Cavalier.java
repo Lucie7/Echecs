@@ -21,7 +21,7 @@ public class Cavalier extends Piece{
     @Override
     public Point[] getCheminDeplacement(Coup c)
     {
-        //Pour le cavalier on ne stock que le point d'arrive
+        //Pour le cavalier on ne stock que le point d'arrive car il peut sauter par dessus les autres pieces
         Point temp = new Point(c.getArrivee().getY(), c.getArrivee().getX());
         
         Point[] res = new Point[1];
@@ -35,22 +35,19 @@ public class Cavalier extends Piece{
     boolean estValideDirection(Coup c)
     {
         boolean res = false;
-        System.err.println("1900");
         
         //test si au depart il est bien dans les dimensions de la grille
         if((c.getDepart().getY() >= 0) && (c.getDepart().getY() < 8) && (c.getDepart().getX() >= 0) && (c.getDepart().getX() < 8))
         {
-            System.err.println("1901");
-            //test si il se deplace de 1 case horizontalement alors il se deplace de deux cases verticalement
+            //si il se deplace de 1 case verticalement alors il se deplace de deux cases horizontalement
             if((abs(c.getArrivee().getY() - c.getDepart().getY()) == 1) && (abs(c.getArrivee().getX() - c.getDepart().getX()) == 2))
             {
-                System.err.println("1902");
+                //dans ce cas la direction est bonne
                 res = true;
             }
-            //test si il se deplace de 1 case verticalement alors il se deplace de deux cases horizontalement
+            //test si il se deplace de 2 cases verticalement alors il se deplace de une case horizontalement
             else if((abs(c.getArrivee().getY() - c.getDepart().getY()) == 2) && (abs(c.getArrivee().getX() - c.getDepart().getX()) == 1))
             {
-                System.err.println("1903");
                 res = true;
             }
         }
